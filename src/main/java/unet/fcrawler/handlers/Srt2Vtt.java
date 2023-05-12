@@ -30,7 +30,7 @@ public class Srt2Vtt {
                     break;
 
                 case Text:
-                    vtt.append("\r\n"+line);
+                    vtt.append("\r\n"+line.replaceAll("\\{\\\\an8}", ""));
                     if(line.length() == 0){
                         state = State.Number;
                     }
