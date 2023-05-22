@@ -61,6 +61,7 @@ public class EpisodeCrawl {
 
             JsonObject z = getEpisode(location);
             z.put("thumbnail", checksum);
+            z.put("video", "");
 
             System.err.println("("+(i+1)+"/"+episodes.size()+") "+z.getString("title")+" : COMPLETE");
 
@@ -76,32 +77,55 @@ public class EpisodeCrawl {
 
         JsonObject response = new JsonObject(script.getBytes());
 
+        String title, description, time, year;
+
         //props pageProps aboveTheFoldData series titleText
-        String title = response.getJsonObject("props")
-                .getJsonObject("pageProps")
-                .getJsonObject("aboveTheFoldData")
-                .getJsonObject("titleText")
-                .getString("text");
+        try{
+            title = response.getJsonObject("props")
+                    .getJsonObject("pageProps")
+                    .getJsonObject("aboveTheFoldData")
+                    .getJsonObject("titleText")
+                    .getString("text");
+        }catch(Exception e){
+            title = "";
+            System.err.println("Failed to get title for: "+url);
+        }
 
-        String description = response.getJsonObject("props")
-                .getJsonObject("pageProps")
-                .getJsonObject("aboveTheFoldData")
-                .getJsonObject("plot")
-                .getJsonObject("plotText")
-                .getString("plainText");
+        try{
+            description = response.getJsonObject("props")
+                    .getJsonObject("pageProps")
+                    .getJsonObject("aboveTheFoldData")
+                    .getJsonObject("plot")
+                    .getJsonObject("plotText")
+                    .getString("plainText");
+        }catch(Exception e){
+            description = "";
+            System.err.println("Failed to get description for: "+url);
+        }
 
-        String time = response.getJsonObject("props")
-                .getJsonObject("pageProps")
-                .getJsonObject("aboveTheFoldData")
-                .getJsonObject("runtime")
-                .getJsonObject("displayableProperty")
-                .getJsonObject("value")
-                .getString("plainText");
+        try{
+            time = response.getJsonObject("props")
+                    .getJsonObject("pageProps")
+                    .getJsonObject("aboveTheFoldData")
+                    .getJsonObject("runtime")
+                    .getJsonObject("displayableProperty")
+                    .getJsonObject("value")
+                    .getString("plainText");
+        }catch(Exception e){
+            time = "";
+            System.err.println("Failed to get time for: "+url);
+        }
 
-        JsonObject release = response.getJsonObject("props")
-                .getJsonObject("pageProps")
-                .getJsonObject("aboveTheFoldData")
-                .getJsonObject("releaseDate");
+        try{
+            JsonObject release = response.getJsonObject("props")
+                    .getJsonObject("pageProps")
+                    .getJsonObject("aboveTheFoldData")
+                    .getJsonObject("releaseDate");
+            year = release.getInteger("day")+" "+months[release.getInteger("month")]+" "+release.getInteger("year");
+        }catch(Exception e){
+            year = "";
+            System.err.println("Failed to get date for: "+url);
+        }
 /*
         String thumbnail = response.getJsonObject("props")
                 .getJsonObject("pageProps")
@@ -114,7 +138,6 @@ public class EpisodeCrawl {
 */
 
 
-        String year = release.getInteger("day")+" "+months[release.getInteger("month")]+" "+release.getInteger("year");
 
         JsonObject j = new JsonObject();
         j.put("title", title);

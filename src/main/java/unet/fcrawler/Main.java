@@ -14,6 +14,7 @@ public class Main {
     //https://jsoup.org/cookbook/extracting-data/selector-syntax
 
     //crawl episodes https://www.imdb.com/title/tt0370194/episodes?season=3 /home/brad/Downloads/im/coming
+    //crawl episodes https://www.imdb.com/title/tt1305826/episodes?season=3 /home/brad/Downloads/thumbs
     //crawl cast https://www.imdb.com/title/tt0370194/?ref_=ttep_ep_tt /home/brad/Downloads/im/coming
 
     public static void main(String[] args)throws Exception {
@@ -48,6 +49,7 @@ public class Main {
                 }
             }catch(Exception e){
                 System.err.println("Fatal exception...");
+                //e.printStackTrace();
             }
         }
     }

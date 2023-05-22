@@ -12,21 +12,33 @@ public class ChunkedInputStream extends FilterInputStream {
         super(in);
     }
 
+    @Override
     public int read()throws IOException {
         byte[] b = new byte[1];
-        read(b, 0, 1);
+        int l = read(b, 0, 1);
+
+        if(l == -1){
+            return -1;
+        }
 
         return b[0];
     }
 
+    @Override
     public int read(byte[] b, int off, int len)throws IOException {
         if(pos == chunk){
             chunk = startChunk();
+
             if(chunk == 0){
+                in.close();
                 return -1;
             }
 
             pos = 0;
+        }
+
+        if(chunk == 0){
+            return -1;
         }
 
         int r = in.read(b, off, (chunk-pos < len) ? chunk-pos : len);
@@ -35,10 +47,12 @@ public class ChunkedInputStream extends FilterInputStream {
         return r;
     }
 
+    @Override
     public int available(){
-        return pos-chunk;
+        return chunk-pos;
     }
 
+    @Override
     public long skip(long n)throws IOException {
         long s;
 

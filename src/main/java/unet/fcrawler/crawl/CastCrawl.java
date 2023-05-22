@@ -23,6 +23,9 @@ public class CastCrawl {
     public JsonArray getCast()throws NoSuchAlgorithmException, IOException {
         Document doc = Jsoup.connect(url.toString()).get();
 
+        //https://www.imdb.com/title/tt0370194/fullcredits?ref_=tt_cl_sm
+
+        /*
         String script = doc.getElementById("__NEXT_DATA__").html();
 
         JsonArray cast = new JsonObject(script.getBytes())
@@ -40,6 +43,7 @@ public class CastCrawl {
             System.out.println(img);
             System.out.println();
         }
+        */
 
         /*
         - SAME LEVEL AS name
