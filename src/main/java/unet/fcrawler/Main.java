@@ -20,6 +20,7 @@ public class Main {
     //crawl episodes https://www.imdb.com/title/tt0370194/episodes?season=3 /home/brad/Downloads/im/coming
     //crawl episodes https://www.imdb.com/title/tt1305826/episodes?season=3 /home/brad/Downloads/thumbs
     //crawl cast https://www.imdb.com/title/tt0370194/?ref_=ttep_ep_tt /home/brad/Downloads/im/coming
+    //crawl thumbnails https://www.imdb.com/title/tt0805663/episodes?season=1 "/home/brad/Downloads/Jericho/S1"
 
     public static void main(String[] args)throws Exception {
         System.out.println("Running FlixBox Crawler - Please type a command");

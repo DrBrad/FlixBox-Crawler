@@ -2,6 +2,7 @@ package unet.fcrawler.commands;
 
 import unet.fcrawler.crawl.CastCrawl;
 import unet.fcrawler.crawl.EpisodeCrawl;
+import unet.fcrawler.crawl.ThumbnailCrawl;
 
 import java.io.File;
 import java.net.URI;
@@ -26,6 +27,12 @@ public class Crawl {
 
             case "episode":
 
+                break;
+
+
+            case "thumbnails":
+                new ThumbnailCrawl(new URI(cmd.get(1)), new File(cmd.get(2))).getThumbnails();
+                System.out.println("All thumbnails downloaded.");
                 break;
 
 
