@@ -22,7 +22,7 @@ public class Main {
     //crawl cast https://www.imdb.com/title/tt0370194/?ref_=ttep_ep_tt /home/brad/Downloads/im/coming
     //crawl thumbnails https://www.imdb.com/title/tt0805663/episodes?season=1 "/home/brad/Downloads/Jericho/S1"
 
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args){
         System.out.println("Running FlixBox Crawler - Please type a command");
 
         Scanner scan = new Scanner(System.in);
